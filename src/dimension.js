@@ -7,13 +7,18 @@ var dimensionStatistic = (rawData, dimensions) => {
     })
     result.push([...set])
   })
+  return result
 }
 
 var dimensionMultiply = (dimX, dimY) => {
   let result = []
   for (let dimXItem of dimX) {
     for (let dimYItem of dimY) {
-      result.push([...dimXItem, ...dimYItem])
+      if (Array.isArray(dimXItem)) {
+        result.push([...dimXItem, dimYItem])
+      } else {
+        result.push([dimXItem, dimYItem])
+      }
     }
   }
   return result
@@ -33,5 +38,5 @@ var dimensionMixer = ({rawData, dimensions, measures}) => {
   result.unshift([...dimensions])
   return result
 }
-
+export {dimensionStatistic, dimensionMultiply}
 export default dimensionMixer

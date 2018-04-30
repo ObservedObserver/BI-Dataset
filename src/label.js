@@ -3,16 +3,16 @@
  * @param {Array} ylabels [array contains label object of y axis]
  * @return {Object} [dimensions and measures]
  */
-var labelProcessers = ({xlabels, ylabels}) => {
+var labelProcesser = ({xlabels, ylabels}) => {
   let dimensions = []
   let measures = []
 
   xlabels.forEach((val) => {
-    val.type === 'String' ? dimension.push(val) : measures.push(val)
+    val.type === 'String' ? dimensions.push(val.name) : measures.push(val.name)
   })
 
   ylabels.forEach((val) => {
-    val.type === 'String' ? dimension.push(val) : measures.push(val)
+    val.type === 'String' ? dimensions.push(val.name) : measures.push(val.name)
   })
 
   return {dimensions, measures}
