@@ -10,5 +10,28 @@
   },
   "scripts": {
     "test": "mocha"
-  }
+  },
+  "name": "bi-dataset",
+  "description": "git test",
+  "version": "0.1.0",
+  "main": "./dist/bundle.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ObservedObserver/BI-Dataset.git"
+  },
+  "keywords": [
+    "BI",
+    "DA",
+    "dataset"
+  ],
+  "author": "ObservedObserver",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ObservedObserver/BI-Dataset/issues"
+  },
+  "homepage": "https://github.com/ObservedObserver/BI-Dataset#readme"
 }
