@@ -91,7 +91,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _src
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nvar dimensionMixer = ({ rawData, dimensions, measures }) => {};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (dimensionMixer);\n\n//# sourceURL=webpack:///./src/dimension.js?");
+eval("__webpack_require__.r(__webpack_exports__);\nvar dimensionStatistic = (rawData, dimensions) => {\n  let result = [];\n  dimensions.forEach(dim => {\n    let set = new Set();\n    rawData.forEach(val => {\n      set.add(val[dim]);\n    });\n    result.push([...set]);\n  });\n};\n\nvar dimensionMultiply = (dimX, dimY) => {\n  let result = [];\n  for (let dimXItem of dimX) {\n    for (let dimYItem of dimY) {\n      result.push([...dimXItem, ...dimYItem]);\n    }\n  }\n  return result;\n};\n/**\n * @param {Array} rawData\n * @param {Array} dimensions\n * @param {Array} measures\n * @return {Array} [matrix of mixed dimensions]\n */\nvar dimensionMixer = ({ rawData, dimensions, measures }) => {\n  let stat = dimensionStatistic(rawData, dimensions);\n  let result = stat[0];\n  for (let i = 1; i < stat.length; i++) {\n    result = dimensionMultiply(result, stat[i]);\n  }\n  result.unshift([...dimensions]);\n  return result;\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (dimensionMixer);\n\n//# sourceURL=webpack:///./src/dimension.js?");
 
 /***/ }),
 
@@ -115,7 +115,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _lab
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nvar labelProcesser = ({ xlabels, ylabels }) => {\n  let dimensions = [];\n  let measures = [];\n\n  // xlabels.forEach\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (labelProcesser);\n\n//# sourceURL=webpack:///./src/label.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/**\n * @param {Array} xlabels [array contains label object of x axis]\n * @param {Array} ylabels [array contains label object of y axis]\n * @return {Object} [dimensions and measures]\n */\nvar labelProcessers = ({ xlabels, ylabels }) => {\n  let dimensions = [];\n  let measures = [];\n\n  xlabels.forEach(val => {\n    val.type === 'String' ? dimension.push(val) : measures.push(val);\n  });\n\n  ylabels.forEach(val => {\n    val.type === 'String' ? dimension.push(val) : measures.push(val);\n  });\n\n  return { dimensions, measures };\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (labelProcesser);\n\n//# sourceURL=webpack:///./src/label.js?");
 
 /***/ }),
 
@@ -127,7 +127,7 @@ eval("__webpack_require__.r(__webpack_exports__);\nvar labelProcesser = ({ xlabe
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nvar matrixProducer = ({ rawData, mixDim }) => {};\n/* harmony default export */ __webpack_exports__[\"default\"] = (matrixProducer);\n\n//# sourceURL=webpack:///./src/matrix.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/**\n * @param {Array} rawData\n * @param {Array} mixDim\n * @return {Array} [dataset]\n */\nvar matrixProducer = ({ rawData, mixDim, measures }) => {\n  // let _length = mixDim[0].length\n  let result = [];\n  for (let i = 1; i < mixDim.length; i++) {\n    let pos = rawData.find(item => {\n      return mixDim[i].every((val, index) => {\n        val === item[mixDim[0][index]];\n      });\n    });\n    if (typeof pos !== 'undefined') {\n      result.push([]);\n      measures.forEach(meas => {\n        result[result.length - 1].push(rawData[pos][meas]);\n      });\n    }\n  }\n  result.unshift(...measures);\n};\n/* harmony default export */ __webpack_exports__[\"default\"] = (matrixProducer);\n\n//# sourceURL=webpack:///./src/matrix.js?");
 
 /***/ })
 
