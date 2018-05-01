@@ -8,11 +8,11 @@ var labelProcesser = ({xlabels, ylabels}) => {
   let measures = []
 
   xlabels.forEach((val) => {
-    val.type === 'String' ? dimensions.push(val.name) : measures.push(val.name)
+    val.type === 'string' ? dimensions.push(val.name) : measures.push(val.name)
   })
 
   ylabels.forEach((val) => {
-    val.type === 'String' ? dimensions.push(val.name) : measures.push(val.name)
+    val.type === 'string' ? dimensions.push(val.name) : measures.push(val.name)
   })
 
   return {dimensions, measures}
