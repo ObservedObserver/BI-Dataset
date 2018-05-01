@@ -6,6 +6,11 @@ import {rawData, dimenStatData, mixerData, matrixData} from './data/rawData.js'
 describe('matrix.js', () => {
   describe('[function]matrixProducer', () => {
     it('case1', () => {
+      // console.log(matrixProducer({
+      //   rawData,
+      //   mixDim: mixerData,
+      //   measures: ['value']
+      // }))
       assert.deepEqual(matrixProducer({
         rawData,
         mixDim: mixerData,
