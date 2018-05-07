@@ -3,7 +3,7 @@
  * @param {Array} mixDim
  * @return {Array} [dataset]
  */
-var matrixProducer = ({rawData, mixDim, measures}) => {
+var matrixProducer = ({rawData, mixDim, measures, statFunc}) => {
   // let _length = mixDim[0].length
   let result = mixDim
   let dimLen = mixDim[0].length
@@ -20,23 +20,49 @@ var matrixProducer = ({rawData, mixDim, measures}) => {
         return val === item[mixDim[0][index]]
       })
     })
-    measures.forEach((meas) => {
-      result[i].push(0)
-    })
-    measures.forEach((meas, index) => {
-      items.forEach((item) => {
-        result[i][dimLen + index] += item[meas]
+    if (typeof statFunc !== 'undefined') {
+      console.log('statFunc', statFunc)
+      let statResult = statFunc({data: items, measures})
+      measures.forEach((meas, index) => {
+        result[i].push(statResult[meas])
       })
-    })
-    // if (pos !== -1) {
-    //   measures.forEach((meas) => {
-    //     result[i].push(rawData[pos][meas])
-    //   })
+    } else {
+      console.log('stat func is not defined.')
+      measures.forEach((meas) => {
+        result[i].push(0)
+      })
+      measures.forEach((meas, index) => {
+        items.forEach((item) => {
+          result[i][dimLen + index] += item[meas]
+        })
+      })
+    }
+    // measures.forEach((meas) => {
+    //   result[i].push(0)
+    // })
+    // if (typeof statFunc !== 'undefined') {
+    //   if (statFunc === 'sum') {
+    //     measures.forEach((meas, index) => {
+    //       items.forEach((item) => {
+    //         result[i][dimLen + index] += item[meas]
+    //       })
+    //     })
+    //   } else if (statFunc === 'count') {
+    //     measures.forEach((meas, index) => {
+    //       items.forEach((item) => {
+    //         result[i][dimLen + index] ++
+    //       })
+    //     })
+    //   }
     // } else {
-    //   measures.forEach((meas) => {
-    //     result[i].push('null')
+    //   // set sum as default
+    //   measures.forEach((meas, index) => {
+    //     items.forEach((item) => {
+    //       result[i][dimLen + index] += item[meas]
+    //     })
     //   })
     // }
+
   }
   return result
 }

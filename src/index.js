@@ -24,9 +24,9 @@ class Core {
       throw 'dimensions or measures not defined, you must use transLabel()to get it'
     }
   }
-  transData () {
+  transData (statFunc) {
     if (typeof this.mixDim !== 'undefined') {
-      this.data = matrixProducer({rawData: this.rawData, mixDim: this.mixDim, measures: this.measures})
+      this.data = matrixProducer({rawData: this.rawData, mixDim: this.mixDim, measures: this.measures, statFunc})
     } else {
       throw 'mixDim not defined, you must use transDimension to get it.'
     }
