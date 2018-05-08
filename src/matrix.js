@@ -20,6 +20,18 @@ var matrixProducer = ({rawData, mixDim, measures, statFunc}) => {
         return val === item[mixDim[0][index]]
       })
     })
+    // items = items.filter((item) => {
+    //   return filters.every((filter) => {
+    //     if (filter.type === 'equal') {
+    //       return filter.value.some((num) => {
+    //         return item[filter.column] === num
+    //       })
+    //     } else {
+    //       // if (filter.type === 'range')  or filter.type === undefined
+    //       return item[filter.column] >= filter.value[0] && item[filter.column] <= filter.value[1]
+    //     }
+    //   })
+    // })
     if (typeof statFunc !== 'undefined') {
       console.log('statFunc', statFunc)
       let statResult = statFunc({data: items, measures})

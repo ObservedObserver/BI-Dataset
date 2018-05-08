@@ -14,7 +14,7 @@
   "name": "bi-dataset",
   "description": "A dataset core for BI app",
   "version": "0.1.3",
-  "main": "./dist/bundle.js",
+  "main": "./main.js",
   "directories": {
     "test": "test"
   },
