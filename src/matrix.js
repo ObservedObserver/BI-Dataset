@@ -1,3 +1,4 @@
+import deepcopy from 'deepcopy'
 /**
  * @param {Array} rawData
  * @param {Array} mixDim
@@ -5,33 +6,20 @@
  */
 var matrixProducer = ({rawData, mixDim, measures, statFunc}) => {
   // let _length = mixDim[0].length
-  let result = mixDim
+  if (mixDim.length === 0) {
+    return []
+  }
+  let result = deepcopy(mixDim)
   let dimLen = mixDim[0].length
   result[0].push(...measures)
   for (let i = 1; i < mixDim.length; i++) {
-    // let pos = rawData.findIndex((item) => {
-    //   return mixDim[i].every((val, index) => {
-    //     // console.log(val, item[mixDim[0][index]])
-    //     return val === item[mixDim[0][index]]
-    //   })
-    // })
+
     let items = rawData.filter((item) => {
       return mixDim[i].every((val, index) => {
         return val === item[mixDim[0][index]]
       })
     })
-    // items = items.filter((item) => {
-    //   return filters.every((filter) => {
-    //     if (filter.type === 'equal') {
-    //       return filter.value.some((num) => {
-    //         return item[filter.column] === num
-    //       })
-    //     } else {
-    //       // if (filter.type === 'range')  or filter.type === undefined
-    //       return item[filter.column] >= filter.value[0] && item[filter.column] <= filter.value[1]
-    //     }
-    //   })
-    // })
+
     if (typeof statFunc !== 'undefined') {
       console.log('statFunc', statFunc)
       let statResult = statFunc({data: items, measures})
@@ -49,31 +37,6 @@ var matrixProducer = ({rawData, mixDim, measures, statFunc}) => {
         })
       })
     }
-    // measures.forEach((meas) => {
-    //   result[i].push(0)
-    // })
-    // if (typeof statFunc !== 'undefined') {
-    //   if (statFunc === 'sum') {
-    //     measures.forEach((meas, index) => {
-    //       items.forEach((item) => {
-    //         result[i][dimLen + index] += item[meas]
-    //       })
-    //     })
-    //   } else if (statFunc === 'count') {
-    //     measures.forEach((meas, index) => {
-    //       items.forEach((item) => {
-    //         result[i][dimLen + index] ++
-    //       })
-    //     })
-    //   }
-    // } else {
-    //   // set sum as default
-    //   measures.forEach((meas, index) => {
-    //     items.forEach((item) => {
-    //       result[i][dimLen + index] += item[meas]
-    //     })
-    //   })
-    // }
 
   }
   return result

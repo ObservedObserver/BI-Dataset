@@ -3,7 +3,7 @@
  * @param {Array} ylabels [array contains label object of y axis]
  * @return {Object} [dimensions and measures]
  */
-var labelProcesser = ({xlabels, ylabels}) => {
+var labelProcesser = ({xlabels = [], ylabels = []}) => {
   let dimensions = []
   let measures = []
 

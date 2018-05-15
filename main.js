@@ -1,3 +1,3 @@
-import Core from './src/index.js'
+import {filterData, transLabel, transDimension, transData} from './src/index.js'
 
-export default Core
+export {filterData, transLabel, transDimension, transData}
