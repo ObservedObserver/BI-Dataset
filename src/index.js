@@ -1,5 +1,5 @@
 import labelProcesser from './label.js'
-import dimensionMixer from './dimension.js'
+import {dimensionValueSet, dimensionMixer} from './dimension.js'
 import matrixProducer from './matrix.js'
 import filterData from './filter.js'
 // filterData ({rawData, filters}) {
@@ -17,4 +17,4 @@ var transData = ({rawData, measures, mixDim = [], statFunc}) => {
   return matrixProducer({rawData, mixDim, measures, statFunc})
 }
 
-export {filterData, transLabel, transDimension, transData}
+export {filterData, transLabel, transDimension, transData, dimensionValueSet}

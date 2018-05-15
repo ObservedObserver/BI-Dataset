@@ -16,6 +16,18 @@ var dimensionStatistic = (rawData, dimensions) => {
   return result
 }
 
+var dimensionValueSet = ({rawData = [], dimensions = []}) => {
+  let result = {}
+  dimensions.forEach((dim) => {
+    let set = new Set()
+    rawData.forEach((val) => {
+      set.add(val[dim])
+    })
+    result[dim] = set
+  })
+  return result
+}
+
 var dimensionMultiply = (dimX, dimY) => {
   let result = []
   for (let dimXItem of dimX) {
@@ -60,5 +72,4 @@ var dimensionMixer = ({rawData, dimensions = []}) => {
   lowerresult.unshift(dimensions.slice(1))
   return {result, lowerresult}
 }
-export {dimensionStatistic, dimensionMultiply}
-export default dimensionMixer
+export {dimensionValueSet, dimensionMixer}
