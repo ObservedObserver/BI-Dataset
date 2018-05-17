@@ -21,13 +21,13 @@ var matrixProducer = ({rawData, mixDim, measures, statFunc}) => {
     })
 
     if (typeof statFunc !== 'undefined') {
-      console.log('statFunc', statFunc)
+      // console.log('statFunc', statFunc)
       let statResult = statFunc({data: items, measures})
       measures.forEach((meas, index) => {
         result[i].push(statResult[meas])
       })
     } else {
-      console.log('stat func is not defined.')
+      // console.log('stat func is not defined.')
       measures.forEach((meas) => {
         result[i].push(0)
       })

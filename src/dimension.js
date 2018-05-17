@@ -7,7 +7,7 @@ var dimensionStatistic = (rawData, dimensions) => {
     })
     result.push([...set])
   })
-  console.log('dimensionStatistic[result]?', result)
+  // console.log('dimensionStatistic[result]?', result)
   if (result.length > 0) {
     result[0] = result[0].map((val) => {
       return [val]
