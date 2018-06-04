@@ -48,28 +48,28 @@ var dimensionMultiply = (dimX, dimY) => {
  */
 var dimensionMixer = ({rawData, dimensions = []}) => {
   let result = []
-  let lowerresult = []
+  // let lowerresult = []
   if (dimensions.length === 0) {
-    return {result, lowerresult}
+    return {result}
   }
   let stat = dimensionStatistic(rawData, dimensions)
   result = stat[0]
   if (dimensions.length === 1) {
     result.unshift([...dimensions])
-    return {result, lowerresult}
+    return {result}
   }
-  let lowerstat = dimensionStatistic(rawData, dimensions.slice(1)) //[]
-  lowerresult = lowerstat[0] //undefined
+  // let lowerstat = dimensionStatistic(rawData, dimensions.slice(1)) //[]
+  // lowerresult = lowerstat[0] //undefined
   // stat.length === dimensions.length
   for (let i = 1; i < stat.length; i++) {
     result = dimensionMultiply(result, stat[i])
   }
   // lowerstat.length === dimensions.length - 1
-  for (let i = 1; i < lowerstat.length; i++) {
-    lowerresult = dimensionMultiply(lowerresult, lowerstat[i])
-  }
+  // for (let i = 1; i < lowerstat.length; i++) {
+  //   lowerresult = dimensionMultiply(lowerresult, lowerstat[i])
+  // }
   result.unshift([...dimensions])
-  lowerresult.unshift(dimensions.slice(1))
-  return {result, lowerresult}
+  // lowerresult.unshift(dimensions.slice(1))
+  return {result}
 }
 export {dimensionValueSet, dimensionMixer}

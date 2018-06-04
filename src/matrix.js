@@ -9,6 +9,9 @@ var matrixProducer = ({rawData, mixDim, measures, statFunc}) => {
   if (mixDim.length === 0) {
     return []
   }
+  if (measures.length === 0) {
+    return mixDim
+  }
   let result = deepcopy(mixDim)
   let dimLen = mixDim[0].length
   result[0].push(...measures)
