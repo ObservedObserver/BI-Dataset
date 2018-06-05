@@ -1,4 +1,4 @@
-var dimensionTree = ({rawData, dimensions}) => {
+var dimensionTree = ({rawData, dimensions, measures = []}) => {
   console.log(dimensions)
   let tree = new Map()
   let node = tree
@@ -13,9 +13,11 @@ var dimensionTree = ({rawData, dimensions}) => {
         node = node.get(dim)
       } else {
         if (!node.has(dim)) {
-          node.set(dim, 0)
+          // node.set(dim, 0)
+          node.set(dim, measures.map(val => 0))
         }
-        node.set(dim, node.get(dim) + 1)
+        // node.set(dim, node.get(dim) + 1)
+        node.set(dim, node.get(dim).map((val, index) => val + item[measures[index]]))
       }
     }
   })
@@ -23,10 +25,10 @@ var dimensionTree = ({rawData, dimensions}) => {
 }
 
 var dfs = function (node, row, ans) {
-  if (typeof node === 'number') {
-    row.push(node)
+  if (Array.isArray(node)) {
+    row.push(...node)
     ans.push([...row])
-    row.pop()
+    row.length -= node.length
   } else {
     let _keys = [...node.keys()]
     _keys.forEach((_key) => {

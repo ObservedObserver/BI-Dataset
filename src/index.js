@@ -18,8 +18,8 @@ var transData = ({rawData, measures, mixDim = [], statFunc}) => {
   return matrixProducer({rawData, mixDim, measures, statFunc})
 }
 
-var dataTree = ({rawData, dimensions, statFunc}) => {
-  return dimensionTree({rawData, dimensions})
+var dataTree = ({rawData, dimensions, measures, statFunc}) => {
+  return dimensionTree({rawData, dimensions, measures})
 }
 
 

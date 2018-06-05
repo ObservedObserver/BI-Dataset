@@ -26,7 +26,7 @@ describe('dimension', () => {
   describe('[function]dimensionTree', () => {
     it('case2', () => {
       console.log('===test start===')
-      let tree = dimensionTree({rawData, dimensions: ['TYPE3', 'TYPE4', 'TYPE5']})
+      let tree = dimensionTree({rawData, dimensions: ['TYPE3', 'TYPE4', 'TYPE5'], measures: ['LEVEL', 'MON']})
       let ans = tree2Matrix({tree})
       console.log('===test end===')
       console.log(ans)
