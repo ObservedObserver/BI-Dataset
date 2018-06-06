@@ -44,4 +44,34 @@ var tree2Matrix = ({tree}) => {
   dfs(tree, [], ans)
   return ans
 }
-export {dimensionTree, tree2Matrix}
+
+var transTree = function (btree) {
+  let ltree = {
+    label: 'root',
+    children: []
+  }
+  let lqueue = []
+  let bqueue = []
+  lqueue.push(ltree)
+  // bqueue.push(btree)
+  bqueue.push(['root', btree])
+  while (lqueue.length !== 0) {
+    let bnode = bqueue.shift()
+    // console.log('bnode', bnode)
+    let lnode = lqueue.shift()
+    lnode.label = bnode[0]
+    // throw bnode[1].entries()
+    if (bnode[1] instanceof Map) {
+      lnode.children = []
+      let bchildren = bnode[1].entries()
+      for (let bchild of bchildren) {
+        let lchild = {}
+        lqueue.push(lchild)
+        bqueue.push(bchild)
+        lnode.children.push(lchild)
+      }
+    }
+  }
+  return ltree
+}
+export {dimensionTree, tree2Matrix, transTree}
