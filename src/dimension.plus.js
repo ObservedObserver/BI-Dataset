@@ -74,4 +74,28 @@ var transTree = function (btree) {
   }
   return ltree
 }
-export {dimensionTree, tree2Matrix, transTree}
+var transTreeDFS = function (bnode, lnode, measures) {
+  lnode.label = bnode[0]
+  if (bnode[1] instanceof Array) {
+    lnode.value = bnode[1]
+    return lnode
+  }
+  if (bnode[1] instanceof Map) {
+    lnode.children = []
+    lnode.value = []
+    let bchildren = bnode[1].entries()
+    for (let bchild of bchildren) {
+      let lchild = {}
+      lnode.children.push(transTreeDFS(bchild, lchild, measures))
+    }
+    lnode.value = measures.map(val => 0)
+
+    for (let i = 0; i < lnode.children.length; i++) {
+      for (let j = 0; j < measures.length; j++) {
+        lnode.value[j] += lnode.children[i].value[j]
+      }
+    }
+    return lnode
+  }
+}
+export {dimensionTree, tree2Matrix, transTree, transTreeDFS}

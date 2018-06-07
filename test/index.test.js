@@ -6,7 +6,7 @@ const assert = require('assert')
 // import {data as rawData} from './data/evaluate.js'
 // import testAns from './data/dimension-test.data.js'
 
-import {dimensionTree, tree2Matrix, transTree} from './../src/dimension.plus.js'
+import {dimensionTree, tree2Matrix, transTree, transTreeDFS} from './../src/dimension.plus.js'
 import labelProcesser from './../src/label.js'
 import {data} from './data/evaluate.js'
 
@@ -42,6 +42,18 @@ describe('dimension', () => {
       let ans = transTree(tree)
       console.log('===test end===')
       console.log(ans.children[0].children[0])
+      assert.equal(ans.children.length > 0, true)
+    })
+    // 测试dimensionMixer
+  })
+
+  describe('[function]dimensionTree', () => {
+    it('case3', () => {
+      console.log('===test start===')
+      let tree = dimensionTree({rawData, dimensions: ['TYPE3', 'TYPE4', 'TYPE5'], measures: ['LEVEL', 'MON']})
+      let ans = transTreeDFS(['root', tree], {label: 'root', children: []}, ['LEVEL', 'MON'])
+      console.log('===test end===')
+      console.log(ans.value)
       assert.equal(ans.children.length > 0, true)
     })
     // 测试dimensionMixer

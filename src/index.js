@@ -1,6 +1,6 @@
 import labelProcesser from './label.js'
 import {dimensionValueSet, dimensionMixer} from './dimension.js'
-import {dimensionTree, tree2Matrix, transTree} from './dimension.plus.js'
+import {dimensionTree, tree2Matrix, transTree, transTreeDFS} from './dimension.plus.js'
 import matrixProducer from './matrix.js'
 import filterData from './filter.js'
 // filterData ({rawData, filters}) {
@@ -23,4 +23,4 @@ var dataTree = ({rawData, dimensions, measures, statFunc}) => {
 }
 
 
-export {filterData, transLabel, transDimension, transData, dimensionValueSet, dataTree, tree2Matrix, transTree}
+export {filterData, transLabel, transDimension, transData, dimensionValueSet, dataTree, tree2Matrix, transTree, transTreeDFS}
