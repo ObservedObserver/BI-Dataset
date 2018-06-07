@@ -74,8 +74,9 @@ var transTree = function (btree) {
   }
   return ltree
 }
-var transTreeDFS = function (bnode, lnode, measures) {
+var transTreeDFS = function ({bnode, lnode, measures = [], level}) {
   lnode.label = bnode[0]
+  lnode.level = level
   if (bnode[1] instanceof Array) {
     lnode.value = bnode[1]
     return lnode
@@ -86,7 +87,12 @@ var transTreeDFS = function (bnode, lnode, measures) {
     let bchildren = bnode[1].entries()
     for (let bchild of bchildren) {
       let lchild = {}
-      lnode.children.push(transTreeDFS(bchild, lchild, measures))
+      lnode.children.push(transTreeDFS({
+        bnode: bchild,
+        lnode: lchild,
+        measures,
+        level: level + 1
+      }))
     }
     lnode.value = measures.map(val => 0)
 
