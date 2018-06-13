@@ -7,12 +7,19 @@ var labelProcesser = ({xlabels = [], ylabels = []}) => {
   let dimensions = []
   let measures = []
 
-  xlabels.forEach((val) => {
-    val.type === 'string' ? dimensions.push(val.name) : measures.push(val.name)
-  })
+  let labels = xlabels.concat(ylabels)
 
-  ylabels.forEach((val) => {
-    val.type === 'string' ? dimensions.push(val.name) : measures.push(val.name)
+  labels.forEach((label) => {
+    switch (label.type) {
+      case 'string':
+        dimensions.push(label.name)
+        break
+      case 'number':
+        measures.push(label.name)
+        break
+      case 'time':
+        dimensions.push('year', 'month')
+    }
   })
 
   return {dimensions, measures}

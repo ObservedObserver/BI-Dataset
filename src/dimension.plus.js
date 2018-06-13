@@ -17,7 +17,7 @@ var dimensionTree = ({rawData, dimensions, measures = []}) => {
           node.set(dim, measures.map(val => 0))
         }
         // node.set(dim, node.get(dim) + 1)
-        node.set(dim, node.get(dim).map((val, index) => val + item[measures[index]]))
+        node.set(dim, node.get(dim).map((val, index) => val + parseFloat(item[measures[index]])))
       }
     }
   })
