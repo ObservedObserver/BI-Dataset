@@ -19,7 +19,7 @@ var transData = ({rawData, measures, mixDim = [], statFunc}) => {
 }
 
 var dataTree = ({rawData, dimensions, measures, statFunc}) => {
-  return dimensionTree({rawData, dimensions, measures})
+  return dimensionTree({rawData, dimensions, measures, statFunc})
 }
 
 

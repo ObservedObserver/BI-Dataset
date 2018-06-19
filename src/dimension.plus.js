@@ -1,27 +1,14 @@
-var dimensionTree = ({rawData, dimensions, measures = []}) => {
-  console.log(dimensions)
-  let tree = new Map()
-  let node = tree
-  rawData.forEach((item, index, arr) => {
-    node = tree
-    for (let i = 0; i < dimensions.length; i++) {
-      let dim = item[dimensions[i]]
-      if (i !== dimensions.length - 1) {
-        if (!node.has(dim)) {
-          node.set(dim, new Map())
-        }
-        node = node.get(dim)
-      } else {
-        if (!node.has(dim)) {
-          // node.set(dim, 0)
-          node.set(dim, measures.map(val => 0))
-        }
-        // node.set(dim, node.get(dim) + 1)
-        node.set(dim, node.get(dim).map((val, index) => val + parseFloat(item[measures[index]])))
-      }
-    }
-  })
-  return tree
+import {DT_SUM, DT_COUNT, DT_AVG} from './util/dimension.util.js'
+var dimensionTree = ({rawData, dimensions, measures = [], statFunc = 'sum'}) => {
+
+  switch (statFunc) {
+    case 'sum':
+      return DT_SUM({rawData, dimensions, measures})
+    case 'count':
+      return DT_COUNT({rawData, dimensions, measures})
+    case 'average':
+      return DT_AVG({rawData, dimensions, measures})
+  }
 }
 
 var dfs = function (node, row, ans) {
@@ -75,7 +62,13 @@ var transTree = function (btree) {
   return ltree
 }
 var transTreeDFS = function ({bnode, lnode, measures = [], level}) {
-  lnode.label = bnode[0]
+  // lnode.label = bnode[0]
+  try {
+    lnode.label = bnode[0]
+  } catch (e) {
+    throw [bnode, lnode, level, measures]
+  } finally {
+  }
   lnode.level = level
   if (bnode[1] instanceof Array) {
     lnode.value = bnode[1]
