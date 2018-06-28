@@ -29,6 +29,9 @@ var dfs = function (node, row, ans) {
 var tree2Matrix = ({tree}) => {
   let ans = []
   dfs(tree, [], ans)
+  if (ans.length === 0) {
+    return [[]]
+  }
   return ans
 }
 

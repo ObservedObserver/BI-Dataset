@@ -27,7 +27,7 @@ describe('dimension', () => {
     it('case2', () => {
       console.log('===test start===')
       let tree = dimensionTree({rawData, dimensions: ['TYPE3', 'TYPE4', 'TYPE5'], measures: ['LEVEL', 'MON']})
-      console.log(tree.entries())
+      // console.log(tree.entries())
       let ans = tree2Matrix({tree})
       console.log('===test end===')
       // console.log(ans)
@@ -53,8 +53,30 @@ describe('dimension', () => {
       let tree = dimensionTree({rawData, dimensions: ['TYPE3'], measures: ['LEVEL', 'MON'], statFunc: 'average'})
       let ans = transTreeDFS({bnode: ['root', tree], lnode: {label: 'root', children: []}, measures: ['LEVEL', 'MON'], level: 0})
       console.log('===test end===')
-      console.dir(tree)
+      // console.dir(tree)
       assert.equal(ans.children.length > 0, true)
+    })
+    // 测试dimensionMixer
+  })
+  describe('[function]dimensionTree', () => {
+    it('case5', () => {
+      console.log('===test start===')
+      let tree = dimensionTree({rawData, dimensions: ['TYPE3'], measures: [], statFunc: 'average'})
+      let ans = tree2Matrix({tree})
+      console.log('===test end===')
+      console.dir(ans)
+      assert.equal(ans.length > 0, true)
+    })
+    // 测试dimensionMixer
+  })
+  describe('[function]dimensionTree', () => {
+    it('case6', () => {
+      console.log('===test start===')
+      let tree = dimensionTree({rawData, dimensions: ['TYPE3'], measures: [], statFunc: 'average'})
+      let ans = tree2Matrix({tree})
+      console.log('===test end===')
+      console.dir(ans)
+      assert.equal(ans.length > 0, true)
     })
     // 测试dimensionMixer
   })
